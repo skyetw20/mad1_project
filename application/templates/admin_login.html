@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block body %} {% set messages =
+get_flashed_messages() %} {% if messages %} {% for message in messages %}
+<div class="alert alert-info">{{ message }}</div>
+{% endfor %} {% endif %}
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-sm-8 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Admin Login</h2>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/admin-login">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                class="form-control"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Login
+            </button>
+          </form>
+          {% if msg %}
+          <div class="alert alert-danger mt-3">{{ msg }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

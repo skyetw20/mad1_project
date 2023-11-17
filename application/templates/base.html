@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>TicketShow</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="static\style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Schoolbell&v1"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">TicketShow</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/movies">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/shows">Shows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/venues">Venues</a>
+          </li>
+
+          {% if status == 'admin' %}
+          <li class="nav-item">
+            <a href="{{url_for('views.admin_logout')}}">
+              <button
+                type="button"
+                class="btn btn-danger"
+                style="margin-top: 1%"
+              >
+                Admin Log Out
+              </button>
+            </a>
+          </li>
+          {%elif status=='logged' %}
+          <li class="nav-item">
+            <a class="nav-link" href="/account">My Account</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url_for('views.logout')}}">
+              <button
+                type="button"
+                class="btn btn-danger"
+                style="margin-top: 1%"
+              >
+                Log Out
+              </button>
+            </a>
+          </li>
+          {%else%}
+          <li class="nav-item">
+            <a href="{{url_for('views.login')}}">
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="margin-top: 1%"
+              >
+                Login/Sign up
+              </button>
+            </a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </nav>
+    {% if msg %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{msg}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {%endif%} {% with messages = get_flashed_messages() %} {%if messages %} {%
+    for msg in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{msg}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {%endif%} {% endwith %} {% block body %} {% endblock %}
+
+    <footer class="py-3 my-4 bg-dark">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item">
+          <a href="/" class="nav-link px-2 text-muted">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/movies" class="nav-link px-2 text-muted">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a href="/shows" class="nav-link px-2 text-muted">Shows</a>
+        </li>
+        <li class="nav-item">
+          <a href="/venues" class="nav-link px-2 text-muted">Venues</a>
+        </li>
+        {% if status == 'admin' %}
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Admin Page</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url_for('views.admin_logout')}}">
+            <button type="button" class="btn btn-danger" style="margin-top: 1%">
+              Admin Log Out
+            </button>
+          </a>
+        </li>
+        {%elif status=='logged' %}
+        <li class="nav-item">
+          <a class="nav-link" href="/account">My Account</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url_for('views.logout')}}">
+            <button type="button" class="btn btn-danger" style="margin-top: 1%">
+              Log Out
+            </button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-top: 1%"
+            onclick="window.location.href='admin-login'"
+          >
+            Admin Login
+          </button>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a href="{{url_for('views.login')}}">
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="margin-top: 1%"
+            >
+              Login/Sign up
+            </button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-top: 1%"
+            onclick="window.location.href='admin-login'"
+          >
+            Admin Login
+          </button>
+        </li>
+        {%endif%}
+        <br />
+      </ul>
+      <p class="text-center text-muted">© 2022 Company, Inc</p>
+    </footer>
+
+    <script src="" async defer></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+      integrity="sha384-mhKjyU5+Tx/LCItHJhFivfQghjXuK36wlJd7V4f4HyGXy7VJjqLl/kK7zSfsSBrS"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

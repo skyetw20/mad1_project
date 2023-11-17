@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block body %} {{movies}}
+
+<div style="width: 90%; margin: 0 auto">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Release Date</th>
+        <th>Theaters</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+      <tr>
+        <td>{{ movie.id }}</td>
+        <td>{{ movie.name }}</td>
+        <td>{{ movie.desc}}</td>
+        <td>{{ movie.rating}}</td>
+        <td>{{ movie.date}}</td>
+        <td>{{ movie.theaters }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endblock %}
+</div>

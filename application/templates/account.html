@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container my-5">
+  <h2 class="text-center mb-5">My Info</h2>
+  <div class="card p-3">
+    <p class="mb-1"><strong>Name:</strong> {{user.name}}</p>
+    <p class="mb-1"><strong>Email:</strong> {{user.email}}</p>
+    <p class="mb-1"><strong>Mobile Number:</strong> {{user.mobile}}</p>
+  </div>
+  <h2 class="text-center my-5">Movie Bookings</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Date</th>
+          <th>Movie</th>
+          <th>Theater</th>
+          <th>Total</th>
+          <th>Seats</th>
+
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in range(bookings|length)%}
+        <tr>
+          <td>{{b+1}}</td>
+          <td>{{bookings[b].date}}</td>
+          <td>{{movies[b]}}</td>
+          <td>{{theaters[b]}}</td>
+          <td>₹{{bookings[b].amount}}</td>
+          <td>{{bookings[b].seats}}</td>
+          <td>{{bookings[b].time}}</td>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+    {% if bookings|length ==0%} No Records Found {%endif%}
+  </div>
+  <h2 class="text-center my-5">Show Bookings</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Date</th>
+          <th>Show Name</th>
+          <th>Theater</th>
+          <th>Total</th>
+          <th>Seats</th>
+
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in range(bookings_shows|length)%}
+        <tr>
+          <td>{{b+1}}</td>
+          <td>{{bookings_shows[b].date}}</td>
+          <td>{{shows[b]}}</td>
+          <td>{{theaters_shows[b]}}</td>
+          <td>₹{{bookings_shows[b].amount}}</td>
+          <td>{{bookings_shows[b].seats}}</td>
+          <td>{{bookings_shows[b].time}}</td>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+    {% if bookings|length ==0%} No Records Found {%endif%}
+  </div>
+  <h2 class="text-center my-5">Venue Bookings</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Date</th>
+          <th>Theater</th>
+          <th>Seats</th>
+          <th>Total</th>
+
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in range(bookings_venues|length)%}
+        <tr>
+          <td>{{b+1}}</td>
+          <td>{{bookings_venues[b].date}}</td>
+          <td>{{theaters_venues[b]}}</td>
+          <td>{{bookings_venues[b].duration}}</td>
+          <td>₹{{bookings_venues[b].amount}}</td>
+          <td>{{bookings_venues[b].time}}</td>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+    {% if bookings|length ==0%} No Records Found {%endif%}
+  </div>
+</div>
+
+{% endblock %}

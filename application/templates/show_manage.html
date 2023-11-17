@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block body %}
+
+<h1>Shows</h1>
+<div style="width: 90%; margin: 0 auto">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Rating</th>
+        <th>Tag</th>
+        <th>Duration</th>
+        <th>Description</th>
+        <th>Theaters</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for show in shows %}
+      <tr>
+        <td>{{ show.id }}</td>
+        <td>{{ show.name }}</td>
+        <td>{{ show.rating }}</td>
+        <td>{{ show.tags }}</td>
+        <td>{{ show.duration }}</td>
+        <td>{{ show.about }} min</td>
+        <td>{{ show.theaters}}</td>
+        <td>
+          <button class="btn btn-primary" onclick="confirmUpdate({{show.id}})">Modify</button>
+          <button class="btn btn-danger" onclick="confirmDelete({{show.id}})">
+            Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if status=='admin'%}
+  <div class="container">
+    <div class="row">
+      <a href="{{url_for('views.movie_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Movie Management
+        </button>
+      </a>
+      <a href="{{url_for('views.show_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Show Management
+        </button>
+      </a>
+      <a href="{{url_for('views.venue_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Venue Management
+        </button>
+      </a>
+    </div>
+    <div class="row">
+      <a href="{{url_for('views.add_movie')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Movie
+        </button>
+      </a>
+      <a href="{{url_for('views.add_show')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Show
+        </button>
+      </a>
+      <a href="{{url_for('views.add_venue')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Venue
+        </button>
+      </a>
+    </div>
+  </div>
+  {%endif%}
+</div>
+<script>
+  function confirmDelete(id) {
+    if (confirm("Are you sure you want to delete this item?")) {
+      window.location.href = `http://127.0.0.1:5000/admin/show_management/delete/${id}`;
+    }
+  }
+  function confirmUpdate(id) {
+    if (confirm("Are you sure you want to update this item?")) {
+      window.location.href = `http://127.0.0.1:5000/admin/show_management/update/${id}`;
+    }
+  }
+</script>
+{% endblock %}

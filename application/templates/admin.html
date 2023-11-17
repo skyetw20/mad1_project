@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container my-5">
+  <h2 class="text-center mb-5">Admin Info</h2>
+
+  <div class="card p-3">
+    <p class="mb-1"><strong>Email:</strong> {{admin}}</p>
+  </div>
+  <h2 class="text-center my-5">Overview</h2>
+  <div class="card p-3">
+    <p class="mb-1"><strong>Total Movies Listed: </strong> {{t_movies}}</p>
+    <p class="mb-1"><strong>Total Shows Listed: </strong> {{t_shows}}</p>
+    <p class="mb-1"><strong>Total Venues Listed: </strong> {{t_venues}}</p>
+    <p class="mb-1">
+      <strong>Total Capacity of all Venues : </strong> {{t_capacity}}
+    </p>
+    <p class="mb-1"><strong>Total Seats Booked : </strong> {{t_booked}}</p>
+    <p class="mb-1"><strong>% Seates Vacant : </strong> {{p_vacant}}%</p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <a href="{{url_for('views.movie_management')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Movie Management
+      </button>
+    </a>
+    <a href="{{url_for('views.show_management')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Show Management
+      </button>
+    </a>
+    <a href="{{url_for('views.venue_management')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Venue Management
+      </button>
+    </a>
+  </div>
+  <div class="row">
+    <a href="{{url_for('views.add_movie')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Add New Movie
+      </button>
+    </a>
+    <a href="{{url_for('views.add_show')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Add New Show
+      </button>
+    </a>
+    <a href="{{url_for('views.add_venue')}}" class="col-md-4 mb-4">
+      <button type="button" class="btn btn-dark" style="width: 200px">
+        Add New Venue
+      </button>
+    </a>
+  </div>
+</div>
+{% endblock %}

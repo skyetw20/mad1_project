@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-sm-8 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Sign Up</h2>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/signup">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="confirm_password">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                required
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="mobile_no">Mobile Number:</label>
+              <input
+                type="tel"
+                id="mobile_no"
+                name="mobile_no"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="submit"
+                class="btn btn-primary btn-block"
+                value="Sign up"
+              />
+            </div>
+          </form>
+          <div class="form-footer">
+            <a href="#" class="forgot-password">Already have an Account?</a>
+            <span class="divider">|</span>
+            <a href="{{url_for('views.login')}}" class="sign-up">Log In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

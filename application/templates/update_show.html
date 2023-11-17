@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container mt-5">
+  {{msg}} {% if status=='admin'%}
+  <div class="container">
+    <div class="row">
+      <a href="{{url_for('views.movie_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Movie Management
+        </button>
+      </a>
+      <a href="{{url_for('views.show_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Show Management
+        </button>
+      </a>
+      <a href="{{url_for('views.venue_management')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Venue Management
+        </button>
+      </a>
+    </div>
+    <div class="row">
+      <a href="{{url_for('views.add_movie')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Movie
+        </button>
+      </a>
+      <a href="{{url_for('views.add_show')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Show
+        </button>
+      </a>
+      <a href="{{url_for('views.add_venue')}}" class="col-md-4 mb-4">
+        <button type="button" class="btn btn-dark" style="width: 200px">
+          Add New Venue
+        </button>
+      </a>
+    </div>
+  </div>
+  {%endif%}
+  <h1>Update Show</h1>
+  <form method="POST" action="/admin/show_management/update">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <div hidden>
+        <input
+          type="number"
+          class="form-control"
+          name="show_id"
+          id="seats"
+          value="{{shows.id}}"
+        />
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        value="{{shows.name}}"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <input
+        type="number"
+        class="form-control"
+        name="rating"
+        min="1"
+        max="5"
+        value="{{shows.rating}}"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="tags">Tag</label>
+      <input
+        type="text"
+        class="form-control"
+        name="tags"
+        value="{{shows.tags}}"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="theaters">Theaters:</label>
+      <select class="form-control" id="theaters" name="theaters" multiple>
+        {% for theater in theaters %}
+        <option value="{{ theater.id }}">
+          {{ theater.name }}, {{theater.place}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="duration">Duration (in minutes)</label>
+      <input
+        type="number"
+        class="form-control"
+        name="duration"
+        min="0"
+        value="{{shows.duration}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="about">About</label>
+      <textarea class="form-control" name="about" rows="5" required>
+{{shows.about}}</textarea
+      >
+    </div>
+    <button type="submit" class="btn btn-primary">Update Show</button>
+  </form>
+</div>
+{% endblock %}
